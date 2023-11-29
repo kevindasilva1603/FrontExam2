@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const baseCurrency = document.getElementById('base-currency').value
             const targetCurrency =
                 document.getElementById('target-currency').value
+            const mode = document.getElementById('conversion-mode').value
 
             if (!amount) {
                 alert('Veuillez entrer une valeur pour le montant.')
@@ -19,14 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 return
             }
 
-            if (baseCurrency === targetCurrency) {
-                alert(
-                    'La devise de base et la devise cible doivent être différentes.'
-                )
-                return
+            if (mode === 'single') {
+                if (baseCurrency === targetCurrency) {
+                    alert(
+                        'La devise de base et la devise cible doivent être différentes.'
+                    )
+                    return
+                }
+                convertCurrency(amount, baseCurrency, targetCurrency)
+            } else if (mode === 'all') {
+                convertToAllCurrencies(amount, baseCurrency)
             }
-
-            convertCurrency(amount, baseCurrency, targetCurrency)
         })
 })
 
@@ -54,17 +58,20 @@ function fetchCurrencies() {
         })
 }
 
-function convertCurrency(amount, base, target) {
-    fetch(
-        `https://api.frankfurter.app/latest?amount=${amount}&from=${base}&to=${target}`
-    )
+function convertToAllCurrencies(amount, base) {
+    fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${base}`)
         .then((response) => response.json())
         .then((data) => {
             const resultElement = document.getElementById('result')
-            const result = data.rates[target]
-            resultElement.innerText = `Résultat : ${amount} ${base} = ${result} ${target}`
+            let tableHTML =
+                '<table><tr><th>Devise</th><th>Montant Converti</th></tr>'
 
-            // Rendre l'élément visible
+            for (const key in data.rates) {
+                tableHTML += `<tr><td>${key}</td><td>${data.rates[key]} ${key}</td></tr>`
+            }
+
+            tableHTML += '</table>'
+            resultElement.innerHTML = tableHTML
             resultElement.style.display = 'block'
         })
         .catch((error) => {

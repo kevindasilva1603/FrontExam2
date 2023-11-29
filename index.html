@@ -8,19 +8,22 @@
             href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
         />
         <link rel="stylesheet" href="./style.css" />
-
         <script src="script.js" defer></script>
     </head>
     <body>
         <h1>Convertisseur de Monnaie</h1>
         <form id="currency-form">
-            AMOUNT
+            <label for="amount">Montant :</label>
             <input type="number" id="amount" placeholder="Montant" />
-            From
+            <label for="base-currency">De :</label>
             <select id="base-currency"></select>
-            TOO
+            <label for="target-currency">Vers :</label>
             <select id="target-currency"></select>
-
+            <label for="conversion-mode">Mode de conversion :</label>
+            <select id="conversion-mode">
+                <option value="single">Devise par devise</option>
+                <option value="all">Toutes les devises</option>
+            </select>
             <button type="submit">Convertir</button>
         </form>
         <div id="result"></div>
