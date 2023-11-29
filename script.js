@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .getElementById('currency-form')
         .addEventListener('submit', function (event) {
             event.preventDefault()
-            const amount = document.getElementById('amount').value
+            let amount = document.getElementById('amount').value
+
+            // Remplacer les virgules par des points et convertir en nombre
+            amount = amount.replace(',', '.')
+            amount = parseFloat(amount)
+
             const baseCurrency = document.getElementById('base-currency').value
             const targetCurrency =
                 document.getElementById('target-currency').value
@@ -33,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
 })
-
 function fetchCurrencies() {
     fetch('https://api.frankfurter.app/currencies')
         .then((response) => response.json())
