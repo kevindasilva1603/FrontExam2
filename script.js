@@ -38,9 +38,12 @@ function fetchCurrencies() {
             const targetCurrencySelect =
                 document.getElementById('target-currency')
 
+            baseCurrencySelect.innerHTML = ''
+            targetCurrencySelect.innerHTML = ''
+
             Object.keys(data).forEach((key) => {
-                baseCurrencySelect.innerHTML += `<option value="${key}">${key}</option>`
-                targetCurrencySelect.innerHTML += `<option value="${key}">${key}</option>`
+                baseCurrencySelect.innerHTML += `<option value="${key}">${key} - ${data[key]}</option>`
+                targetCurrencySelect.innerHTML += `<option value="${key}">${key} - ${data[key]}</option>`
             })
         })
         .catch((error) => {
@@ -69,7 +72,6 @@ function convertCurrency(amount, base, target) {
                 'Problème lors de la conversion. Veuillez réessayer plus tard.'
             )
             console.error('Erreur:', error)
-            // Vous pouvez choisir de cacher l'élément result ici en cas d'erreur
             document.getElementById('result').style.display = 'none'
         })
 }
