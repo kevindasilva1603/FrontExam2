@@ -1,0 +1,30 @@
+body {
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    margin-top: 30px;
+    gap: 40px;
+    background-color: rgba(240, 248, 255, 0.539);
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f2f2f2;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    color: #333;
+    font-size: 1.2em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#currency-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* ajustez cette valeur selon l'espace souhaité */
+}

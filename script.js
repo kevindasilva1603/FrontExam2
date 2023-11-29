@@ -57,15 +57,19 @@ function convertCurrency(amount, base, target) {
     )
         .then((response) => response.json())
         .then((data) => {
+            const resultElement = document.getElementById('result')
             const result = data.rates[target]
-            document.getElementById(
-                'result'
-            ).innerText = `Résultat : ${amount} ${base} = ${result} ${target}`
+            resultElement.innerText = `Résultat : ${amount} ${base} = ${result} ${target}`
+
+            // Rendre l'élément visible
+            resultElement.style.display = 'block'
         })
         .catch((error) => {
             alert(
                 'Problème lors de la conversion. Veuillez réessayer plus tard.'
             )
             console.error('Erreur:', error)
+            // Vous pouvez choisir de cacher l'élément result ici en cas d'erreur
+            document.getElementById('result').style.display = 'none'
         })
 }
