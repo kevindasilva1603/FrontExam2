@@ -58,6 +58,26 @@ function fetchCurrencies() {
         })
 }
 
+function convertCurrency(amount, base, target) {
+    fetch(
+        `https://api.frankfurter.app/latest?amount=${amount}&from=${base}&to=${target}`
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            const resultElement = document.getElementById('result')
+            const result = data.rates[target]
+            resultElement.innerText = `Résultat : ${amount} ${base} = ${result} ${target}`
+            resultElement.style.display = 'block'
+        })
+        .catch((error) => {
+            alert(
+                'Problème lors de la conversion. Veuillez réessayer plus tard.'
+            )
+            console.error('Erreur:', error)
+            document.getElementById('result').style.display = 'none'
+        })
+}
+
 function convertToAllCurrencies(amount, base) {
     fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${base}`)
         .then((response) => response.json())
