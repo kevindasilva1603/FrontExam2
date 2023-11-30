@@ -15,6 +15,4 @@ Le Convertisseur de Monnaie est une application web simple qui permet aux utilis
 -   Navigateur web moderne
 -   Accès à Internet
 
-## Installation
 
-Clonez le dépôt en utilisant :
